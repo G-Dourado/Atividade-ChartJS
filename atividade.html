@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Temperatura e Umidade</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <style>
+    .dashboard {
+     
+      gap: 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+  </style>
+</head>
+<body>
+
+  <h1>Atividade om chartJS P.I</h1>
+
+  <div class="dashboard">
+    <div>
+      <h2>Gráfico de Linhas</h2>
+      <canvas id="graficoLinhas"></canvas>
+    </div>
+
+    <div>
+      <h2>Gráfico de Barras</h2>
+      <canvas id="graficoBarras"></canvas>
+    </div>
+  </div>
+
+  <script>
+    // Gráfico de Linhas: dados por horário
+    const horarios = ["12:00", "13:00", "14:00", "15:00", "16:00", "17:00"];
+    const temperaturaHora = [30, 29, 28, 25, 22, 23];
+    const umidadeHora = [80, 82, 80, 85, 80, 83];
+
+    new Chart(document.getElementById("graficoLinhas"), {
+      type: "line",
+      data: {
+        labels: horarios,
+        datasets: [
+          {
+            label: "Temperatura",
+            data: temperaturaHora,
+            borderColor: "#ff6384",
+            backgroundColor: "#ff6384",
+            tension: 0,
+            pointRadius: 3
+          },
+          {
+            label: "Umidade",
+            data: umidadeHora,
+            borderColor: "#36a2eb",
+            backgroundColor: "#36a2eb",
+            tension: 0,
+            pointRadius: 3
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: "top" }
+        },
+        scales: {
+          y: { beginAtZero: false }
+        }
+      }
+    });
+
+   
+    const meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho"];
+    const temperaturaMedia = [22, 24, 27, 23, 20, 18];
+    const umidadeMedia = [90, 89, 93, 87, 88, 82];
+
+    new Chart(document.getElementById("graficoBarras"), {
+      type: "bar",
+      data: {
+        labels: meses,
+        datasets: [
+          {
+            label: "Temperatura Média",
+            data: temperaturaMedia,
+            backgroundColor: "#ff6384"
+          },
+          {
+            label: "Umidade Média",
+            data: umidadeMedia,
+            backgroundColor: "#36a2eb"
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: "top" }
+        },
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>
